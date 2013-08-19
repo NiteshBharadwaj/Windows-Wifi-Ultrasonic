@@ -1,0 +1,20 @@
+import java.lang.System
+fs = 44100;
+f1 = 20070;
+f2 = 20130;
+dt = 1/fs;
+offset =0;
+T=10;
+t = 0:dt:T-dt;
+[z,p,k] = butter(10,[f1*2/fs f2*2/fs]);
+[sos,g] = zp2sos(z,p,k);
+Hd = dfilt.df2tsos(sos,g);
+recObj = audiorecorder(fs,16,2);
+temp = System.currentTimeMillis();
+record(recObj,T);
+temp1 = System.currentTimeMillis();
+iniTime = (temp+temp1)/2;
+[c,l,m] = udprecord('RECEIVE',1562,1024,10000,recObj,iniTime);
+lu = str2double(m);
+recObj.StopFcn = {@recCallback,recObj,fs,t,Hd,lu+offset};
+disp(lu+offset);

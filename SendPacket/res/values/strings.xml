@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SendPacket</string>
+    <string name="startSending">Start Sending</string>
+    <string name="stopSending">Stop Sending</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>
